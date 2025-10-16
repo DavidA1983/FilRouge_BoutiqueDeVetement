@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ categorie.nom }}{% endblock %}
+
+{% block body %}
+{# 💬 Message flash (confirmation ajout panier) #}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success text-center flash-message shadow-sm py-2">
+        {{ message }}
+    </div>
+{% endfor %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">{{ categorie.nom }}</h1>
+
+    <div class="row g-4">
+        {% for produit in produits %}
+            <div class="col-md-4 col-sm-6">
+                <div class="card h-100 shadow-sm">
+                    {% if produit.image %}
+                        <img src="{{ asset('images/' ~ produit.image) }}" class="card-img-top" alt="{{ produit.nom }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ produit.nom }}</h5>
+                        <p class="card-text text-muted">{{ produit.prix }} €</p>
+                        <a href="{{ path('app_categorie_detail', {'id': produit.id}) }}" class="btn btn-primary w-100">Voir le produit</a>
+                         <a href="{{ path('app_panier_ajouter', {'id': produit.id}) }}" class="btn btn-success">
+                Ajouter au panier
+            </a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p class="text-center text-muted">Aucun produit dans cette catégorie.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+setTimeout(() => {
+    const message = document.querySelector('.flash-message');
+    if (message) {
+        message.style.transition = "opacity 1s ease, transform 1s ease";
+        message.style.opacity = "0";
+        message.style.transform = "translateY(-20px)";
+        setTimeout(() => message.remove(), 1000);
+    }
+}, 3000); // 3 secondes d'affichage avant de disparaître
+</script>
+{% endblock %}

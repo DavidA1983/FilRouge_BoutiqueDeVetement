@@ -1,0 +1,38 @@
+
+
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path('app_accueil') }}">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path('app_categorie_homme') }}">Homme</a>
+        </li>
+                <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path('app_categorie_femme') }}">Femme</a>
+        </li>
+                <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path('app_categorie_enfant') }}">Enfant</a>
+        </li>
+                <li class="nav-item">
+  <a class="nav-link" href="{{ path('app_panier_index') }}">
+    🛒 Panier 
+    {% if panier_count > 0 %}
+      <span class="badge bg-success">{{ panier_count }}</span>
+      <small class="text-muted">({{ panier_total|number_format(2, ',', ' ') }} €)</small>
+    {% else %}
+      <span class="text-muted">(vide)</span>
+    {% endif %}
+  </a>
+</li>          
+          <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{ path('app_mail') }}">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+

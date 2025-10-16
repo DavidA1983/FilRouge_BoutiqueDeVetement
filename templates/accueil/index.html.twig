@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+<div class="container text-center mt-5 p-5 bg-light bg-opacity-75 rounded-3">
+<h1> Bienvenue chez ORMA </h1>
+<p> La boutique de vêtements pour toutes les morphologies </p>
+<p> Vous trouverez ici des vêtements pour hommes, femmes et enfants </p>
+<p> N'hésitez pas à parcourir nos différentes catégories de vêtements </p>
+<p> Bonne visite ! </p>
+</div>
+
+
+<div class="container d-flex justify-content-around mt-5 p-5 bg-light bg-opacity-75 rounded-3">
+<div class="carousel-container">
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    
+    <div class="carousel-item active">
+      <a href="{{ path('app_categorie_homme') }}">
+        <img src="{{ asset('images/homme.jpg') }}" class="d-block w-100"  alt="Image 1">
+      </a>
+    </div>
+    
+    <div class="carousel-item">
+      <a href="{{ path('app_categorie_femme') }}">
+        <img src="{{ asset('images/femme.jpg') }}" class="d-block w-100" alt="Image 2">
+      </a>
+    </div>
+    
+    <div class="carousel-item">
+      <a href="{{ path('app_categorie_enfant') }}">
+        <img src="{{ asset('images/enfant.jpg') }}" class="d-block w-100"  alt="Image 3">
+      </a>
+    </div>
+
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+
+{% endblock %}

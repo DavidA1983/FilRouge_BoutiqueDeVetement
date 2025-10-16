@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="bg-light bg-opacity-75 shadow p-5 rounded-4">
+                <h1 class="text-center mb-4">Contactez-nous</h1>
+
+
+              {% for message in app.flashes('success') %}
+    <div class="alert alert-success text-center flash-message shadow-sm py-2">
+        {{ message }}<br>
+        Vous serez redirigé vers l'accueil dans <span id="countdown">5</span> secondes.
+    </div>
+{% endfor %}
+
+                {{ form_start(form) }}
+                    <div class="mb-3">
+                        {{ form_label(form.nom) }}
+                        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.prenom) }}
+                        {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.sujet) }}
+                        {{ form_widget(form.sujet, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.message) }}
+                        {{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+                    </div>
+                    <div class="text-center">
+                        {{ form_widget(form.envoyer, {'attr': {'class': 'btn btn-primary px-4'}}) }}
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function startCountdown() {
+    const countdownEl = document.getElementById('countdown');
+
+    if (!countdownEl) {
+        // Si le span n’existe pas encore, on réessaie dans 100ms
+        setTimeout(startCountdown, 100);
+        return;
+    }
+
+    let seconds = parseInt(countdownEl.textContent);
+    const flashMessage = countdownEl.closest('.flash-message');
+
+    const interval = setInterval(() => {
+        seconds--;
+        countdownEl.textContent = seconds;
+
+
+        if (seconds <= 0) {
+            clearInterval(interval);
+            window.location.href = "{{ path('app_accueil') }}"; // ta route d'accueil
+        }
+    }, 1000);
+}
+
+// Lancer le script
+startCountdown();
+</script>
+
+{% endblock %}

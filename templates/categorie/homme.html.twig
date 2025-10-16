@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ categorie.nom }}{% endblock %}
+
+{% block body %}
+<div>
+<h1>    Homme </h1>
+<p>    Découvrez notre sélection de vêtements pour hommes, alliant style et confort pour toutes les occasions. </p>
+<p>    Des tenues décontractées aux costumes élégants, trouvez le look qui vous correspond. </p>
+<p>    Profitez de nos offres exclusives et renouvelez votre garde-robe dès aujourd'hui ! </p>
+</div>  
+
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">{{ categorie.nom }}</h1>
+
+    <div class="row g-4">
+        {% for produit in produits %}
+            <div class="col-md-4 col-sm-6">
+                <div class="card h-100 shadow-sm">
+                    {% if produit.image %}
+                        <img src="{{ asset('images/' ~ produit.image) }}" class="card-img-top" alt="{{ produit.nom }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ produit.nom }}</h5>
+                        <p class="card-text text-muted">{{ produit.prix }} €</p>
+                        <a href="#" class="btn btn-primary w-100">Voir le produit</a>
+                         <a href="{{ path('app_panier_ajouter', {'id': produit.id}) }}" class="btn btn-success">
+                Ajouter au panier
+            </a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <p class="text-center text-muted">Aucun produit dans cette catégorie.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
